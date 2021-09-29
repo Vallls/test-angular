@@ -2,7 +2,6 @@ import {Component, ViewChild, OnInit, Input} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {Characters} from "../../models/characters";
 import {Observable} from "rxjs";
 import {Table} from "../../models/table";
 
@@ -28,6 +27,7 @@ export class TableComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
+    console.log(this.displayedColumns)
 
   }
 
