@@ -17,6 +17,7 @@ export class TableComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  displayedColumns2: any[] = this.displayedColumns.map(col => col.value)
 
   constructor() {
   }
