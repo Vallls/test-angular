@@ -12,12 +12,12 @@ import {Table} from "../../models/table";
 })
 export class TableComponent implements OnInit {
 
-  @Input() displayedColumns: Table[] = []
+  @Input() dataTable: Table[] = []
   @Input() arrayData!: Observable<any[]>
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  displayedColumns2: any[] = this.displayedColumns.map(col => col.value)
+  displayedColumns!: any[]
 
   constructor() {
   }
@@ -25,9 +25,12 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.arrayData.subscribe(res => {
       this.dataSource = new MatTableDataSource(res);
+      console.log(res)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
+    this.displayedColumns = this.dataTable.map(col => col.value)
+    console.log(this.dataTable)
     console.log(this.displayedColumns)
 
   }

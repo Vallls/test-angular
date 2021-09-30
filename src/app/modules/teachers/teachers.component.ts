@@ -15,7 +15,7 @@ import {Table} from "../../models/table";
 export class TeachersComponent implements OnInit {
 
   teachers!: Observable<Characters[]>;
-  displayedColumns: Table[] = [
+  dataTable: Table[] = [
     {
       name: 'Image',
       value: 'image',
@@ -37,26 +37,12 @@ export class TeachersComponent implements OnInit {
       type: 'string'
     }
   ];
-  dataSource!: MatTableDataSource<Characters>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private api: APIService) {
   }
 
   ngOnInit(): void {
-    this.teachers = this.api.getTeachers()
-
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.teachers = this.api.getTeachers();
   }
 }
 
