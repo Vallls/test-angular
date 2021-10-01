@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Image",
+    "value": "image",
+    "type": "image"
+  },
+  {
+    "name": "Name",
+    "value": "name",
+    "type": "string"
+  },
+  {
+    "name": "Patronus",
+    "value": "patronus",
+    "type": "string"
+  },
+  {
+    "name": "Age",
+    "value": "age",
+    "type": "number"
+  }
+]

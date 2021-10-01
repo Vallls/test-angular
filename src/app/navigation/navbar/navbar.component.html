@@ -1,21 +1,38 @@
 <nav class="nav_body">
   <div class="navbar_content">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu_nav">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/">
+        <span>Home</span>
+      </button>
+      <button mat-menu-item routerLink="/teachers">
+        <span>Profesores</span>
+      </button>
+      <button mat-menu-item routerLink="/students">
+        <span>Estudiantes</span>
+      </button>
+      <button mat-menu-item routerLink="/characters">
+        <span>Personajes</span>
+      </button>
+    </mat-menu>
+    <div class="item_nav" matRipple routerLink="/">
+      Home
+    </div>
     <div class="item_nav" matRipple routerLink="/teachers">
       Profesores
-    </div>
-    <div class="item_nav" matRipple routerLink="/students">
-      Estudiantes
     </div>
   </div>
   <div class="nav_center" routerLink="/home">
     <img src="assets/images/logo.png" height="80%">
   </div>
   <div class="navbar_content">
+    <div class="item_nav" matRipple routerLink="/students">
+      Estudiantes
+    </div>
     <div class="item_nav" matRipple routerLink="/characters">
       Personajes
-    </div>
-    <div class="item_nav" matRipple>
-      Directiva
     </div>
   </div>
 </nav>

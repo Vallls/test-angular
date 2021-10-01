@@ -1,13 +1,12 @@
-<body>
 <div class="body_table">
   <mat-tab-group>
     <mat-tab label="Estudiantes">
       <app-table [arrayData]="students" [dataTable]="dataTable"></app-table>
     </mat-tab>
     <mat-tab label="Solicitudes">
-
+      <button mat-raised-button color="primary" class="application_button" (click)="addApplication()">Agregar
+      </button>
+      <app-table [arrayData]="applications" [dataTable]="dateTableApp"></app-table>
     </mat-tab>
   </mat-tab-group>
-
 </div>
-</body>

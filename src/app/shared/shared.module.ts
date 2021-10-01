@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {AlertComponent} from "../components/modals/alert/alert.component";
+import {CommonModule, DatePipe} from '@angular/common';
 import {ApplicationComponent} from "../components/modals/application/application.component";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AngularMaterialModule} from "../material.module";
@@ -9,7 +8,6 @@ import {TableComponent} from "../components/table/table.component";
 
 @NgModule({
   declarations: [
-    AlertComponent,
     ApplicationComponent,
     TableComponent
   ],
@@ -24,6 +22,9 @@ import {TableComponent} from "../components/table/table.component";
     FormsModule,
     AngularMaterialModule,
     TableComponent,
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class SharedModule {

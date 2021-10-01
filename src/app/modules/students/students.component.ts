@@ -1,11 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Observable} from "rxjs";
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Characters} from "../../models/characters";
 import {Table} from "../../models/table";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort} from "@angular/material/sort";
 import {APIService} from "../../services/api.service";
+import * as data from "../../static-data/info_table.json"
+import {MatDialog} from "@angular/material/dialog";
+import {ApplicationComponent} from "../../components/modals/application/application.component";
+import {take} from "rxjs/operators";
+import {Application} from "../../models/application";
+import * as status from "../../static-data/status.json"
+import {Status} from "../../models/status";
 
 @Component({
   selector: 'app-students',
@@ -13,33 +16,75 @@ import {APIService} from "../../services/api.service";
   styleUrls: ['./students.component.scss']
 })
 export class StudentsComponent implements OnInit {
-  students!: Observable<Characters[]>;
-  dataTable: Table[] = [
+  students: EventEmitter<Characters[]> = new EventEmitter<Characters[]>()
+  dataTable: Table[] = JSON.parse(JSON.stringify(data)).default;
+  dataStatus: Status[] = JSON.parse(JSON.stringify(status)).default;
+  applications: EventEmitter<Application[]> = new EventEmitter<Application[]>();
+  dateTableApp = [
     {
-      name: 'Image',
-      value: 'image',
-      type: 'image'
+      "name": "Application Date",
+      "value": "application_date",
+      "type": "string"
     },
     {
-      name: 'Name',
-      value: 'name',
-      type: 'string'
+      "name": "Name",
+      "value": "name",
+      "type": "string"
     },
     {
-      name: 'Patronus',
-      value: 'patronus',
-      type: 'string'
+      "name": "Age",
+      "value": "age",
+      "type": "number"
     },
     {
-      name: 'Age',
-      value: 'dateOfBirth',
-      type: 'string'
-    }
-  ];
-  constructor(private api: APIService) { }
+      "name": "Status",
+      "value": "status",
+      "type": "number"
+    }]
+
+  constructor(private api: APIService, public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
-    this.students = this.api.getStudents();
+    this.api.getStudents().subscribe(res => {
+      this.students.emit(res.map(a => {
+        if (a.dateOfBirth) {
+          a.age = this.api.calculateAge(a.dateOfBirth)
+        }
+        return a
+      }))
+      if (JSON.parse(<string>localStorage.getItem("applications"))) {
+        this.applications.emit(JSON.parse(<string>localStorage.getItem("applications")).map((a: any) => {
+          if (a.status) {
+            a.status = this.dataStatus.find(e => e.id = a.status)!.value
+          }
+          return a
+        }))
+      } else {
+        this.applications.emit([])
+      }
+    })
+  }
+
+  async addApplication() {
+    const dialogRef = this.dialog.open(ApplicationComponent, {
+      minWidth: '330px',
+      panelClass: 'dialog-container',
+      disableClose: true, //cerrar al dar click afuera del modal
+    })
+    await dialogRef.afterClosed().pipe(take(1)).toPromise().then(result => {
+      console.log(result)
+      if (result == 'true') {
+        console.log(JSON.parse(<string>localStorage.getItem("applications")))
+        this.applications.emit(JSON.parse(<string>localStorage.getItem("applications")).map((a: any) => {
+          if (a.status) {
+            a.status = this.dataStatus.find(e => e.id = a.status)!.value
+          }
+
+          return a
+        }))
+      }
+    });
   }
 
 }

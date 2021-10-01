@@ -1,20 +1,20 @@
-<mat-form-field appearance="standard">
+<mat-form-field appearance="standard" class="table_search">
   <mat-label>Buscar</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort *ngIf="arrayData && dataTable">
     <div *ngFor="let column of dataTable">
       <ng-container [matColumnDef]="column.value">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="table_content"> {{column.name}}</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="header_content"> {{column.name}}</th>
         <td mat-cell *matCellDef="let row" class="table_content">
-            <img src="{{row[column.value]}}" class="table_img" *ngIf="column.type =='image'; else stringBlock">
-            <ng-template #stringBlock >{{row[column.value]? row[column.value] : '-'}} </ng-template>
+          <img src="{{row[column.value]}}" class="table_img" *ngIf="column.type =='image'; else stringBlock" alt="">
+          <ng-template #stringBlock>{{row[column.value] ? row[column.value] : '-'}} </ng-template>
         </td>
       </ng-container>
     </div>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
     <tr class="mat-row" *matNoDataRow>
@@ -22,5 +22,5 @@
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10]" aria-label="Select page of users"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[4]" aria-label="Select page of users"></mat-paginator>
 </div>

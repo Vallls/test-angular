@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Characters} from "../models/characters";
 import {Observable} from "rxjs";
+import {Table} from "../models/table";
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,10 @@ export class APIService {
 
   getStudents() {
     return this.http.get(`${this.baseUrl}students`) as Observable<Characters[]>
+  }
+
+  calculateAge(date: string) {
+    var timeDiff = Math.abs(Date.now() - (new Date(date)).getTime());
+    return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
   }
 }

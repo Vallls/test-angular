@@ -1,0 +1,35 @@
+.stepper_content {
+  background-color: transparent;
+}
+
+.select_option {
+  text-transform: capitalize;
+}
+
+.content_select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #c8d1c5f7;
+  height: 50%;
+  width: auto;
+  border-style: solid;
+  padding: 5rem;
+}
+
+.return_stepper {
+  margin: 0 1rem 0 0;
+}
+
+::ng-deep .mat-step-header {
+  pointer-events: none !important;
+}
+
+.form_select {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 205px);
+}

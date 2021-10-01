@@ -11,15 +11,21 @@ td, th {
   width: 25%;
   height: 80px;
 }
-.table_content{
-  text-align: center;
+
+.table_content {
   display: table-cell;
   vertical-align: middle;
   text-transform: capitalize;
 }
 
-.table_img{
+.table_img {
   height: 100%;
   border-radius: 100px;
   padding: 5px 0 0 0;
+}
+
+@media (max-width: 545px) {
+  .mat-form-field {
+    width: 100%;
+  }
 }

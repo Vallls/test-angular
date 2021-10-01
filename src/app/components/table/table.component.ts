@@ -1,8 +1,7 @@
-import {Component, ViewChild, OnInit, Input} from '@angular/core';
+import {Component, ViewChild, Input, EventEmitter, OnInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {Observable} from "rxjs";
 import {Table} from "../../models/table";
 
 @Component({
@@ -13,7 +12,7 @@ import {Table} from "../../models/table";
 export class TableComponent implements OnInit {
 
   @Input() dataTable: Table[] = []
-  @Input() arrayData!: Observable<any[]>
+  @Input() arrayData!: EventEmitter<any[]>
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -22,7 +21,8 @@ export class TableComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    console.log('esto llego', this.arrayData)
     this.arrayData.subscribe(res => {
       this.dataSource = new MatTableDataSource(res);
       console.log(res)
@@ -32,8 +32,8 @@ export class TableComponent implements OnInit {
     this.displayedColumns = this.dataTable.map(col => col.value)
     console.log(this.dataTable)
     console.log(this.displayedColumns)
-
   }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

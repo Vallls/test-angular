@@ -1,5 +1,30 @@
-<body>
 <div class="body_table">
-  <app-table [arrayData]="characters" [dataTable]="dataTable"></app-table>
+  <mat-stepper #stepper [linear]="true" class="stepper_content" labelPosition="bottom">
+    <mat-step [stepControl]="selectHouse" errorMessage="La opción es requerida"
+              [completed]="selectHouse.valid">
+      <form [formGroup]="selectHouse" class="form_select">
+        <ng-template matStepLabel>Elige la casa a consultar</ng-template>
+        <div class="content_select">
+          <h2>Selecciona una Casa</h2>
+          <mat-form-field appearance="fill">
+            <mat-label>Casas</mat-label>
+            <mat-select formControlName="house" class="select_option">
+              <mat-option [value]="house">
+                Selecciona una opción
+              </mat-option>
+              <mat-option *ngFor="let house of houses" [value]="house" class="select_option">
+                {{house}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-raised-button color="primary" matStepperNext (click)="checkList()">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step state="done" editable="false" disabled="true">
+      <button mat-raised-button color="primary" class="return_stepper" matStepperPrevious>Regresar</button>
+      <ng-template matStepLabel>Lista de Personajes</ng-template>
+      <app-table *ngIf="characters" [arrayData]="characters" [dataTable]="dataTable"></app-table>
+    </mat-step>
+  </mat-stepper>
 </div>
-</body>

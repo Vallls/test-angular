@@ -3,7 +3,7 @@
   height: 70px;
   background: transparent;
   display: flex;
-  position: fixed;
+  top: 0;
 }
 
 .navbar_content {
@@ -31,4 +31,22 @@
 
 .item_nav:hover {
   color: goldenrod;
+}
+
+.menu_nav {
+  display: none;
+}
+
+@media(max-width: 490px) {
+  .menu_nav {
+    display: block;
+  }
+
+  .item_nav {
+    display: none;
+  }
+
+  .navbar_content {
+    justify-content: flex-start;
+  }
 }

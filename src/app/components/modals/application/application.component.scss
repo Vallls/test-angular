@@ -1,0 +1,20 @@
+.modal_content {
+  display: flex;
+  height: auto;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_content {
+  flex-direction: column;
+  display: flex;
+}
+
+.field_modal {
+  padding: 6% 1% 6% 0;
+}
+
+.form-button {
+  margin-bottom: 6%;
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "value": "En espera"
+  },
+  {
+    "id": 2,
+    "value": "En revisión"
+  },
+  {
+    "id": 3,
+    "value": "Aprobado"
+  },
+  {
+    "id": 4,
+    "value": "Cancelado"
+  }
+]
