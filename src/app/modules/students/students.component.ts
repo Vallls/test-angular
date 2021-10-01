@@ -20,7 +20,7 @@ export class StudentsComponent implements OnInit {
   dataTable: Table[] = JSON.parse(JSON.stringify(data)).default;
   dataStatus: Status[] = JSON.parse(JSON.stringify(status)).default;
   applications: EventEmitter<Application[]> = new EventEmitter<Application[]>();
-  dateTableApp = [
+  dateTableApp: Table[] = [
     {
       "name": "Application Date",
       "value": "application_date",
@@ -73,9 +73,7 @@ export class StudentsComponent implements OnInit {
       disableClose: true, //cerrar al dar click afuera del modal
     })
     await dialogRef.afterClosed().pipe(take(1)).toPromise().then(result => {
-      console.log(result)
       if (result == 'true') {
-        console.log(JSON.parse(<string>localStorage.getItem("applications")))
         this.applications.emit(JSON.parse(<string>localStorage.getItem("applications")).map((a: any) => {
           if (a.status) {
             a.status = this.dataStatus.find(e => e.id = a.status)!.value

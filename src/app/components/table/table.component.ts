@@ -22,16 +22,12 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('esto llego', this.arrayData)
     this.arrayData.subscribe(res => {
       this.dataSource = new MatTableDataSource(res);
-      console.log(res)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
     this.displayedColumns = this.dataTable.map(col => col.value)
-    console.log(this.dataTable)
-    console.log(this.displayedColumns)
   }
 
 
