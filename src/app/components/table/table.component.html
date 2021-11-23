@@ -2,7 +2,6 @@
   <mat-label>Buscar</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Harry Potter" #input>
 </mat-form-field>
-
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort *ngIf="arrayData && dataTable">
     <div *ngFor="let column of dataTable">
@@ -21,6 +20,5 @@
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
     </tr>
   </table>
-
   <mat-paginator [pageSizeOptions]="[4]" aria-label="Select page of users"></mat-paginator>
 </div>
